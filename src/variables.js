@@ -1,3 +1,4 @@
 export default {
-  small: 'w300'
+  small: 'w300',
+  original: 'original'
 }

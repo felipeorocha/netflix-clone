@@ -62,5 +62,24 @@ export default {
         items: await fetchTitles(`/discover/movie?with_genres=${categories.documentary}&language=${language}&api_key=${API_KEY}`)
       },
     ]
+  },
+  getMovieInfo: async (movieId, mediaType) => {
+    let info = {};
+
+    if (movieId) {
+      switch(mediaType) {
+        case 'movie':
+          info = await fetchTitles(`/movie/${movieId}?language=${language}&api_key=${API_KEY}`);
+          break;
+        case 'tv':
+          info = await fetchTitles(`/tv/${movieId}?language=${language}&api_key=${API_KEY}`);
+          break;
+        default:
+          info = null;
+          break;
+      }
+    }
+
+    return info;
   }
 }
