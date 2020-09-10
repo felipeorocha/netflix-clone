@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import apiData from './service/api';
 
-console.log(apiData.getHomeList())
+import CategoriesList from './components/categoriesList';
 
-function App() {
+const App = () => {
+  const [movieList, setMovieList] = useState([]);
+  useEffect(() => {
+    const fetchMediaData = async () => {
+      const response = await apiData.getHomeList();
+      setMovieList(response);
+    }
+
+    fetchMediaData();
+  }, []);
+
   return (
     <div className="App">
-      <h1>Bla</h1>
+      <section className="lists">
+        { movieList.map(item => (
+            <CategoriesList title={item.title} items={item.items} />
+          )) }
+      </section>
     </div>
   );
 }
