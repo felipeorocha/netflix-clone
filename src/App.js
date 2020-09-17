@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { css } from "@emotion/core";
 import { BeatLoader } from "react-spinners";
+import styled from 'styled-components';
 
 import apiData from './service/api';
 
@@ -36,6 +37,10 @@ const App = () => {
     fetchMediaData();
   }, []);
 
+  const ListsContainer = styled.section`
+    margin-top: -150px;
+  `;
+
   return (
     <div className="App">
         <BeatLoader
@@ -46,11 +51,11 @@ const App = () => {
           loading={loader}
         />
       { featuredData && <FeaturedMovie item={featuredData} /> }
-      <section className="lists">
+      <ListsContainer>
         { movieList.map(item => (
             <CategoriesList title={item.title} items={item.items} />
           )) }
-      </section>
+      </ListsContainer>
     </div>
   );
 }
