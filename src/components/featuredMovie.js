@@ -12,43 +12,49 @@ const FeaturedMovie = ({ item }) => {
     background-image: url(https://image.tmdb.org/t/p/${size.original}${item.backdrop_path});
   `;
 
-  const VerticalFade = styled.div`
+  const Fade = styled.div`
     width: inherit;
     height: inherit;
-    background: linear-gradient(to top, #111 10%, transparent 90%);
-  `;
 
-  const HorizontalFade = styled.div`
-    width: inherit;
-    height: inherit;
-    background: linear-gradient(to right, #111 30%, transparent 70%);
-  `;
+    background: ${props => props.vertical ? css`
+      linear-gradient(to top, #111 10%, transparent 90%);
+     ` : props.horizontal ? css`
+      linear-gradient(to right, #111 30%, transparent 70%);
+     ` : ''}
+  ;`
 
   const FeaturedName = styled.div`
-
+    font-size: 60px;
+    font-weight: bold;
   `;
 
   const FeaturedInfo = styled.div`
-
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
   `;
 
   const FeaturedPoints = styled.div`
-
+    display: inline-block;
+    color: #46d369;
+    margin-right: 15px;
   `;
 
   const FeaturedYear = styled.div`
-
+    display: inline-block;
+    margin-right: 15px;
   `;
 
   const FeaturedSeasons = styled.div`
-
+    display: inline-block;
+    margin-right: 15px;
   `;
 
   const FeaturedDescription = styled.div`
 
   `;
 
-  const FeaturedButtons = styled.div`
+  const FeaturedButtonsContainer = styled.div`
 
   `;
 
@@ -56,12 +62,16 @@ const FeaturedMovie = ({ item }) => {
 
   `;
 
+  const FeaturedButtons = styled.a`
+
+  `;
+
   const onAirAt = new Date(item.first_air_date);
 
   return (
     <FeaturedContainer>
-      <VerticalFade>
-        <HorizontalFade>
+      <Fade vertical>
+        <Fade horizontal>
           <FeaturedName>{item.original_name}</FeaturedName>
           <FeaturedInfo>
             <FeaturedPoints>{item.vote_average} pontos</FeaturedPoints>
@@ -69,10 +79,13 @@ const FeaturedMovie = ({ item }) => {
             <FeaturedSeasons>{item.number_of_seasons} temporada{ item.number_of_seasons > 1 ? 's' : '' }</FeaturedSeasons>
           </FeaturedInfo>
           <FeaturedDescription>{item.overview}</FeaturedDescription>
-          <FeaturedButtons></FeaturedButtons>
+          <FeaturedButtonsContainer>
+            <FeaturedButtons href={`/watch/${item.id}`}>►	Assistir</FeaturedButtons>
+            <FeaturedButtons href={`/list/add/${item.id}`}>+ Minha Lista</FeaturedButtons>
+          </FeaturedButtonsContainer>
           <FeaturedGenres><strong>Generos: </strong>{item.genres.map(el => el.name).join(', ')}</FeaturedGenres>
-        </HorizontalFade>
-      </VerticalFade>
+        </Fade>
+      </Fade>
     </FeaturedContainer>
   );
 }
