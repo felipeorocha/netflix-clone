@@ -7,6 +7,7 @@ import apiData from './service/api';
 
 import CategoriesList from './components/categoriesList';
 import FeaturedMovie from './components/featuredMovie';
+import Header from './components/header';
 
 const override = css`
   display: flex;
@@ -18,6 +19,7 @@ const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [featuredData, setFeaturedData] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [headerBackground, setHeaderBackground] = useState(false);
 
   useEffect(() => {
     const fetchMediaData = async () => {
@@ -37,19 +39,36 @@ const App = () => {
     fetchMediaData();
   }, []);
 
+  useEffect(() => {
+    const scroller = () => {
+      if (window.scrollY > 20) {
+        setHeaderBackground(true);
+      } else {
+        setHeaderBackground(false);
+      }
+    }
+
+    window.addEventListener('scroll', scroller);
+
+    return () => {
+      window.removeEventListener('scroll', scroller);
+    }
+  }, []);
+
   const ListsContainer = styled.section`
     margin-top: -150px;
   `;
 
   return (
     <div className="App">
-        <BeatLoader
-          css={override}
-          size={25}
-          margin={2}
-          color={"red"}
-          loading={loader}
-        />
+      <Header hasBackground={headerBackground} />
+      <BeatLoader
+        css={override}
+        size={25}
+        margin={2}
+        color={"red"}
+        loading={loader}
+      />
       { featuredData && <FeaturedMovie item={featuredData} /> }
       <ListsContainer>
         { movieList.map(item => (
