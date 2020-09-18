@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { css } from "@emotion/core";
 import { BeatLoader } from "react-spinners";
-import styled from 'styled-components';
 
 import apiData from './service/api';
 
 import CategoriesList from './components/categoriesList';
 import FeaturedMovie from './components/featuredMovie';
 import Header from './components/header';
+
+import ListsContainer from './appStyles';
 
 const override = css`
   display: flex;
@@ -41,7 +42,7 @@ const App = () => {
 
   useEffect(() => {
     const scroller = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 220) {
         setHeaderBackground(true);
       } else {
         setHeaderBackground(false);
@@ -55,10 +56,6 @@ const App = () => {
     }
   }, []);
 
-  const ListsContainer = styled.section`
-    margin-top: -150px;
-  `;
-
   return (
     <div className="App">
       <Header hasBackground={headerBackground} />
@@ -71,8 +68,8 @@ const App = () => {
       />
       { featuredData && <FeaturedMovie item={featuredData} /> }
       <ListsContainer>
-        { movieList.map(item => (
-            <CategoriesList title={item.title} items={item.items} />
+        { movieList.map((item, key) => (
+            <CategoriesList key={key} title={item.title} items={item.items} />
           )) }
       </ListsContainer>
     </div>
