@@ -31,6 +31,19 @@ export const MoviewRow = styled.div`
   `}
 `;
 
+export const Navigator = styled.div`
+  position: absolute;
+  width: 40px;
+  height: 225px;
+  ${props => props.next && css`
+
+  `}
+
+  ${props => props.previous && css`
+
+  `}
+`;
+
 export const Title = styled.h2`
   margin: 0 0 0 30px;
 `;
