@@ -59,20 +59,20 @@ const App = () => {
   return (
     <div className="App">
       <Header hasBackground={headerBackground} />
-      <BeatLoader
+      { movieList <= 0 && <BeatLoader
         css={override}
         size={25}
         margin={2}
         color={"red"}
         loading={loader}
-      />
+      /> }
       { featuredData && <FeaturedMovie item={featuredData} /> }
-      <ListsContainer>
+      { !loader && <ListsContainer>
         { movieList.map((item, key) => (
             <CategoriesList key={key} title={item.title} items={item.items} />
           )) }
-      </ListsContainer>
-      <Footer>
+      </ListsContainer> }
+      <Footer loader={loader}>
         Data provided from <span>Themoviedb.org</span><br/>
         All rights reserved. Netflix, Inc.
       </Footer>
