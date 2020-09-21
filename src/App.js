@@ -8,7 +8,7 @@ import CategoriesList from './components/categoriesList';
 import FeaturedMovie from './components/featuredMovie';
 import Header from './components/header';
 
-import ListsContainer from './appStyles';
+import { ListsContainer, Footer } from './appStyles';
 
 const override = css`
   display: flex;
@@ -72,6 +72,10 @@ const App = () => {
             <CategoriesList key={key} title={item.title} items={item.items} />
           )) }
       </ListsContainer>
+      <Footer>
+        Data provided from <span>Themoviedb.org</span><br/>
+        All rights reserved. Netflix, Inc.
+      </Footer>
     </div>
   );
 }
