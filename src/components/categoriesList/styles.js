@@ -31,7 +31,9 @@ export const MoviewRow = styled.div`
   `}
 
   ${props => props.list && css`
-    width: 99999999px;
+    transition: all ease 0.2s;
+    width: ${({width}) => `${width}px`};
+    margin-left: ${({scroll}) => `${scroll}px`};
   `}
 `;
 
