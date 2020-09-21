@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 export const MoviewRow = styled.div`
   ${props => props.main && css`
     margin-bottom: 30px;
+
+    &:hover ${Navigator} {
+      opacity: 1;
+    }
   `}
 
   ${props => props.listarea && css`
@@ -34,14 +38,33 @@ export const MoviewRow = styled.div`
 export const Navigator = styled.div`
   position: absolute;
   width: 40px;
-  height: 225px;
-  ${props => props.next && css`
+  height: 375px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: all ease 0.3s;
 
+  & svg {
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  ${props => props.next && css`
+    right: 5px;
   `}
 
   ${props => props.previous && css`
-
+    left: 5px;
   `}
+
+  & svg:hover {
+    font-size: 2.5rem;
+    transition: all ease 0.2s;
+  }
 `;
 
 export const Title = styled.h2`
